@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Discussion VIP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #151525);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .vip-container {
+      width: 95%;
+      max-width: 1200px;
+      background: rgba(20, 20, 30, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(150, 100, 255, 0.25);
+      padding: 20px;
+    }
+
+    /* HEADER */
+    .vip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .vip-title {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .vip-badge {
+      background: linear-gradient(45deg, #8a5cff, #b084ff);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .vip-desc {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    /* CONTENT */
+    .vip-content {
+      display: flex;
+      gap: 15px;
+    }
+
+    /* CHAT */
+    .vip-chat {
+      flex: 3;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .vip-chat iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+
+    /* SIDEBAR */
+    .vip-sidebar {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    .vip-sidebar h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #b084ff;
+    }
+
+    .vip-sidebar ul {
+      padding-left: 18px;
+    }
+
+    .vip-sidebar li {
+      margin-bottom: 8px;
+    }
+
+    /* FOOTER */
+    .vip-footer {
+      text-align: center;
+      font-size: 12px;
+      opacity: 0.5;
+      margin-top: 15px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      .vip-content {
+        flex-direction: column;
+      }
+
+      .vip-chat iframe {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="vip-container">
+
+    <!-- HEADER -->
+    <div class="vip-header">
+      <div class="vip-title">💬 Discussion VIP</div>
+      <div class="vip-badge">VIP ONLY</div>
+    </div>
+
+    <div class="vip-desc">
+      Espace réservé aux membres VIP. Discussions privées, infos exclusives et échanges directs.
+    </div>
+
+    <!-- CONTENT -->
+    <div class="vip-content">
+
+      <!-- CHAT -->
+      <div class="vip-chat">
+        <!-- REMPLACE L'URL PAR TON CHAT -->
+        <iframe src="https://discord.com/widget?id=TON_ID_DISCORD&theme=dark"></iframe>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="vip-sidebar">
+        <h3>📌 Infos VIP</h3>
+        <ul>
+          <li>Respect obligatoire</li>
+          <li>Pas de spam</li>
+          <li>Contenu confidentiel</li>
+        </ul>
+
+        <h3>🎁 Bonus</h3>
+        <ul>
+          <li>Cadeau VIP mensuel</li>
+          <li>Votes exclusifs</li>
+          <li>Accès anticipé aux projets</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="vip-footer">
+      © VIP Lounge – Accès réservé
+    </div>
+
+  </div>
+
+</body>
+</html>
