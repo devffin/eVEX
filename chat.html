@@ -26,125 +26,81 @@
       padding: 20px;
     }
 
-    /* HEADER */
-    .vip-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
+    .vip-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+    .vip-title { font-size: 26px; font-weight: bold; }
+    .vip-badge { background: linear-gradient(45deg, #8a5cff, #b084ff); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; }
+    .vip-desc { font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
 
-    .vip-title {
-      font-size: 26px;
-      font-weight: bold;
-    }
+    .vip-content { display: flex; gap: 15px; }
 
-    .vip-badge {
-      background: linear-gradient(45deg, #8a5cff, #b084ff);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: bold;
-    }
+    .vip-chat { flex: 3; background: rgba(0, 0, 0, 0.4); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.08); }
+    .vip-chat iframe { width: 100%; height: 500px; border: none; }
 
-    .vip-desc {
-      font-size: 14px;
-      opacity: 0.8;
-      margin-bottom: 20px;
-    }
+    .vip-sidebar { flex: 1; background: rgba(0, 0, 0, 0.35); border-radius: 12px; padding: 15px; font-size: 14px; }
+    .vip-sidebar h3 { margin-top: 0; font-size: 16px; color: #b084ff; }
+    .vip-sidebar ul { padding-left: 18px; }
+    .vip-sidebar li { margin-bottom: 8px; }
 
-    /* CONTENT */
-    .vip-content {
-      display: flex;
-      gap: 15px;
-    }
+    .vip-footer { text-align: center; font-size: 12px; opacity: 0.5; margin-top: 15px; }
 
-    /* CHAT */
-    .vip-chat {
-      flex: 3;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .vip-chat iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
-    }
-
-    /* SIDEBAR */
-    .vip-sidebar {
-      flex: 1;
-      background: rgba(0, 0, 0, 0.35);
-      border-radius: 12px;
-      padding: 15px;
-      font-size: 14px;
-    }
-
-    .vip-sidebar h3 {
-      margin-top: 0;
-      font-size: 16px;
-      color: #b084ff;
-    }
-
-    .vip-sidebar ul {
-      padding-left: 18px;
-    }
-
-    .vip-sidebar li {
-      margin-bottom: 8px;
-    }
-
-    /* FOOTER */
-    .vip-footer {
-      text-align: center;
-      font-size: 12px;
-      opacity: 0.5;
-      margin-top: 15px;
-    }
-
-    /* MOBILE */
     @media (max-width: 800px) {
-      .vip-content {
-        flex-direction: column;
-      }
-
-      .vip-chat iframe {
-        height: 420px;
-      }
+      .vip-content { flex-direction: column; }
+      .vip-chat iframe { height: 420px; }
     }
+
+    .fade-out { animation: fadeOut 0.5s forwards ease; }
+    .fade-in { animation: fadeIn 0.5s forwards ease; }
+    .shake { animation: shake 0.4s; }
+
+    @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(1.03); } to { opacity: 1; transform: scale(1); } }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Password toggle adjustments */
+    .password-container { position: relative; width: 100%; }
+    #toggle-pass { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background: rgba(255,255,255,0.12); border: none; width: 30px; height: 30px; border-radius: 8px; color: #fff; font-size: 16px; }
   </style>
 </head>
 
 <body>
 
-  <div class="vip-container">
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" style="position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#0a0a0a,#151525); z-index:9999;">
+    <div id="login-card" style="background:rgba(20,20,30,0.95); padding:30px; border-radius:16px; width:90%; max-width:380px; box-shadow:0 0 30px rgba(150,100,255,0.25); text-align:center; display:flex; flex-direction:column; gap:10px;">
+      <h2 style="margin-top:0;">🔐 Connexion VIP</h2>
+      <p style="font-size:14px; opacity:0.8;">Entre ton pseudo et mot de passe VIP.</p>
+      <input id="login-name" type="text" placeholder="Pseudo VIP" style="width:100%; padding:12px; border-radius:10px; border:none; outline:none; box-sizing:border-box; font-size:14px;">
 
-    <!-- HEADER -->
+      <!-- Password with toggle -->
+      <div class="password-container">
+        <input id="login-pass" type="password" placeholder="Mot de passe" style="width:100%; padding:12px 42px 12px 12px; border-radius:10px; border:none; outline:none; box-sizing:border-box; font-size:14px;">
+        <button id="toggle-pass" type="button" aria-label="Afficher/Masquer le mot de passe">👁</button>
+      </div>
+
+      <button id="login-btn" style="width:100%; padding:12px; border-radius:10px; border:none; cursor:pointer; background:linear-gradient(45deg,#8a5cff,#b084ff); color:#fff; font-weight:bold;">Se connecter</button>
+      <a id="create-vip-btn" href="https://forms.gle/tqNrFGFJT5DPiWTx6" target="_blank" style="display:block; margin-top:10px; width:100%; padding:12px; border-radius:10px; text-decoration:none; background:rgba(255,255,255,0.08); color:#fff; font-weight:bold; box-sizing:border-box;">✨ Créer VIP</a>
+      <div id="login-error" style="color:#ff6b6b; font-size:13px; display:none;">Identifiants incorrects.</div>
+    </div>
+  </div>
+
+  <div class="vip-container" id="vip-app" style="display:none;">
     <div class="vip-header">
       <div class="vip-title">💬 Discussion VIP</div>
       <div class="vip-badge">VIP ONLY</div>
     </div>
 
-    <div class="vip-desc">
-      Espace réservé aux membres VIP. Discussions privées, infos exclusives et échanges directs.
-    </div>
+    <div class="vip-desc">Espace réservé aux membres VIP. Discussions privées, infos exclusives et échanges directs.</div>
 
-    <!-- CONTENT -->
     <div class="vip-content">
-      <!-- CHAT -->
       <div class="vip-chat">
-        <!-- REMPLACE L'URL PAR TON CHAT -->
-        <widgetbot
-          server="1371145956585898096"
-          channel="1451629610558034155"
-          width="870"
-          height="600"
-        ></widgetbot>
+        <widgetbot server="1371145956585898096" channel="1451629610558034155" width="870" height="600"></widgetbot>
       </div>
-      <!-- SIDEBAR -->
       <div class="vip-sidebar">
         <h3>📌 Infos VIP</h3>
         <ul>
@@ -160,11 +116,52 @@
         </ul>
       </div>
     </div>
-    <!-- FOOTER -->
-    <div class="vip-footer">
-      © eVEX VIP – Accès réservé
-    </div>
+    <div class="vip-footer">© eVEX VIP – Accès réservé</div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+  <script>
+    const allowedUsers = {"LSE":"v001p2"};
+    const loginScreen = document.getElementById('login-screen');
+    const vipApp = document.getElementById('vip-app');
+    const loginBtn = document.getElementById('login-btn');
+    const loginName = document.getElementById('login-name');
+    const loginPass = document.getElementById('login-pass');
+    const togglePass = document.getElementById('toggle-pass');
+    const loginError = document.getElementById('login-error');
+    const loginCard = document.getElementById('login-card');
+
+    loginScreen.style.display = 'flex';
+    vipApp.style.display = 'none';
+
+    // Toggle mot de passe
+    togglePass.addEventListener('click', () => {
+      if (loginPass.type === 'password') loginPass.type = 'text';
+      else loginPass.type = 'password';
+    });
+
+    loginBtn.addEventListener('click', tryLogin);
+    loginName.addEventListener('keydown', (e) => { if(e.key==='Enter') tryLogin(); });
+    loginPass.addEventListener('keydown', (e) => { if(e.key==='Enter') tryLogin(); });
+
+    function tryLogin(){
+      const name = loginName.value.trim();
+      const pass = loginPass.value;
+      if(allowedUsers[name] && allowedUsers[name]===pass){
+        loginError.style.display='none';
+        loginScreen.classList.add('fade-out');
+        setTimeout(()=>{
+          loginScreen.style.display='none';
+          vipApp.style.display='block';
+          vipApp.classList.add('fade-in');
+        },500);
+      } else {
+        loginError.style.display='block';
+        loginCard.classList.remove('shake');
+        void loginCard.offsetWidth;
+        loginCard.classList.add('shake');
+      }
+    }
+  </script>
 </body>
 </html>
